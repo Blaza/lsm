@@ -1,0 +1,13 @@
+language: r
+
+env:
+  global:
+    - secure: QXUimJfWP06Hx47G8UZXdUHJWMKG7dGH
+
+before_script:
+  - chmod +x ./build.sh
+  - chmod +x ./deploy.sh
+
+script:
+  - ./build.sh
+  - ./deploy.sh
