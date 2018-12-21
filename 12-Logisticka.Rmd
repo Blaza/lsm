@@ -1,0 +1,55 @@
+# Logistička regresija
+
+\require{\amsmath}
+
+## Uvod
+
+Pretpostavimo da je zavisna promenljiva $Y$ indikator nekog dogadjaja, tj. da ima Bernulijevu raspodelu, čiji parametar zavisi od vrednosti prediktora $X$:
+$$Y:\begin{pmatrix}0 & 1 \\1-\pi(X) & \pi(X)\end{pmatrix}.$$ Kako $Y$ uzima samo dve vrednosti, nema smisla koristiti linearan model $Y = \beta_0 + \beta_1X$. Smislenije je modelovati verovatnoću $P\{Y=1\mid X\} = \pi(X)\in[0,1]$, ali, zbog ograničenosti verovatnoće, model $\pi(X)=\beta_0 + \beta_1X$ takodje nije adekvatan.
+
+Zato je potrebno modelovati ovu verovatnoću kao $\pi(X) = g(\beta_0 + \beta_1X)$, gde je $g$ funkcija koja uzima vrednosti iz $[0,1]$. Postoje razni izbori ove funkcije $g$, od kojih su najčešći funkcije raspodela odredjenih raspodela verovatnoća (npr. probit regresija koristi standardnu normalnu raspodelu $g(x)=\Phi(x)$).
+
+U kontekstu logističke regresije, model koji koristimo je
+$$\pi(X) = \frac{e^{\beta_0 + \beta_1X}}{1+e^{\beta_0 + \beta_1X}}.$$
+U ovom slučaju uzeli smo $g(x) = \frac{e^x}{1+e^x}$, što je funkcija raspodele logističke raspodele. Ova funkcija se takodje zove i logistička funkcija, a i specijalan slučaj je tzv. sigmoidnih funkcija.
+
+## Kvote
+
+Ako je $\pi(X) = \frac{e^{\beta_0 + \beta_1X}}{1+e^{\beta_0 + \beta_1X}}$, onda će biti $$\log\frac{\pi(X)}{1-\pi(X)} = \beta_0 + \beta_1X.$$ Veličina $\frac{\pi(X)}{1-\pi(X)}\in(0, +\infty)$ se naziva kvotom i mi u logističkoj regresiji u suštini modelujemo logaritam kvote linearnim modelom.
+
+Kvota $q(X) = \frac{\pi(X)}{1-\pi(X)}=\frac{P\{Y=1\mid X\}}{P\{Y=0\mid X\}}$ predstavlja odnos verovatnoća da zavisna promenljiva uzme vrednost 1 odnosno 0, za odredjenu vrednost prediktora. Ukoliko su ove dve verovatnoće jednake, kvota će biti 1.
+Ako je $q(X)>1$, to znači da je verovatnoća da $Y$ uzme vrednost 1 $q(X)$ puta veča nego da uzme vrednost 0. Obrat važi u slučaju da je $q(X)<1$.
+
+Na primer, ako je $q(X)=4=4:1$, to znači da je 4 puta verovatnije da je $Y=1$ nego $Y=0$. S druge strane, ako je $q(X)=0.125=1:8$, to znači da je 8 puta verovatnije da je $Y=0$ nego $Y=1$.
+
+## Ocene parametara $\beta$
+
+Parametri modela logističke regresije se ocenjuju metodom maksimalne verodostojnosti, odnosno rešavanjem minimizacionog problema (zbog lakšeg računa se gleda logaritam funkcije verodostojnosti):
+$$\hat\beta = \underset{\beta}{argmin}\ \log\left( \prod_{i=1}^n\left(1-\pi(x_i)\right)^{1-y_i}\pi(x_i)^{y_i}\right).$$ Detalji izračunavanja se nalaze u skripti za predavanja.
+
+## Interpretacija parametara $\beta$
+
+Kod (proste) linearne regresije, parametar $b_1$ se interpretira kao "za koliko se promeni $Y$ ako se $X$ promeni za 1 jedinicu mere". Kod logističke regresije je situacija nešto kompleksnija, jer imamo logističku transformaciju.
+
+Pogledajmo šta se dešava ako $X$ povećamo za 1 jedinicu mere.
+Kako je $\log(q(X)) = \beta_0 + \beta_1X$, biće $\log(q(X+1)) - \log(q(X)) = \beta_1$, tj. $\beta_1$ predstavlja promenu logaritma kvote. Odavde imamo $\log\frac{q(X+1)}{q(X)}= \beta_1$, pa stoga  $$\frac{q(X+1)}{q(X)} = e^\beta_1.$$ Dakle, prilikom povećanja vrednosti $X$ za 1 jedinicu mere, kvota se menja $e^\beta_1$ puta.
+
+Ako je $\beta_1=0$, to znači da nema promene u kvoti, a samim tim ni u verovatnoći $\pi(X)$. Ovo je u saglasnosti sa slučajem linearne regresije kada smo testirali da li je koeficijent nula, čime smo odredjivali da li je značajan ili ne.
+Ako je $\beta_1<0$, kvota se smanjuje, dok ako je $\beta_1>0$ kvota se povećava.
+
+Kako se povećanjem (smanjenjem) kvote povećava (smanjuje) i verovatnoća $\pi(X)$, zaključujemo da znak koeficijenta $\beta_!$ odredjuje pozitivan ili negativan uticaj prediktora $X$ na verovatnoću $P\{Y=1\mid X\}$.
+Konkretna vrednost $e^\beta_1$ odredjuje koliko puta se menja kvota jediničnom promenom u prediktoru $X$.
+
+Ova priča je bila samo u slučaju 1 prediktora $X$, ali se jednostavno uopštava na više prediktora. Naime, koeficijent uz $X_1$ će uticati na promenu u kvoti za jedinično povečanje vrednosti $X_1$, pri uslovu da su vredosti svih drugih prediktora fiksirane.
+
+## Testiranje značajnosti koeficijenata
+
+### Valdov test
+
+Kao što smo rekli, smatramo da postoji uticaj prediktora $X$ na verovatnoću $\pi(X)$ i kažemo da je statistički značajan, ako je $\beta_1\neq 0$. Dakle, prilikom testiranja značajnosti nekog koeficijenta $\beta_i$ testiraćemo hipotezu $$H_0 : \beta_i=0\quad \text{protiv} \quad H_1:\beta_i\neq0.$$
+
+U ovu svrhu možemo koristiti test statistiku:
+$$\frac{\hat{\beta_i} - \beta_i}{s.e.(\hat\beta_i)} \sim \mathcal{N}(0,1),$$
+što znači da pod nultom hipotezom $H_0 : \beta_i=0$ važi 
+$$\frac{\hat{\beta_i}}{s.e.(\hat\beta_i)} \sim \mathcal{N}(0,1).$$
+Ovaj test je korišćen u R-u za testiranje značajnosti pojedinačnih koeficijenata (zvezdice).

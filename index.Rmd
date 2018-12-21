@@ -1,0 +1,16 @@
+---
+title: "Teorijski priručnik za LSM"
+author: "Blagoje Ivanović"
+date: "Poslednja izmena: `r format(Sys.time(), '%d %B, %Y')`"
+site: bookdown::bookdown_site
+output:
+  bookdown::gitbook: default
+---
+
+# Predgovor {-}
+
+Na ovoj stranici će biti prikazane teorijske osnove potrebne za praćenje vežbi i razumevanje kodova koji se mogu naći na stranici kursa. Može se shvatiti kao beleške sa vežbi. U razvojnoj je fazi i biće dopunjavana relativno često.
+
+Opširnije teorijsko razmatranje linearnih modela se nalazi u materijalima profesorke Bojane Milošević, na adresi: http://www.matf.bg.ac.rs/p/bojana-milosevic/kurs/533/linearni-statisticki-modeli/
+
+Sa leve strane se nalazi sadržaj koji sadrži oblasti koje su predjene na vežbama (za koje je napisan teorijski uvod). Kodovi u R-u koji prate sve oblasti se nalaze na http://www.matf.bg.ac.rs/p/blagoje-ivanovic/cas/2731/%C4%8Casovi/
