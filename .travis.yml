@@ -1,5 +1,7 @@
 language: r
 
+cache: packages
+
 env:
   global:
     - secure: QXUimJfWP06Hx47G8UZXdUHJWMKG7dGH
