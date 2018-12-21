@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>2 Logistička regresija | Teorijski priručnik za LSM</title>
+  <meta name="description" content="2 Logistička regresija | Teorijski priručnik za LSM">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+
+  <meta property="og:title" content="2 Logistička regresija | Teorijski priručnik za LSM" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="2 Logistička regresija | Teorijski priručnik za LSM" />
+  
+  
+  
+
+<meta name="author" content="Blagoje Ivanović">
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="analiza-glavnih-komponenti-pca.html">
+
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; position: absolute; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; }
+pre.numberSource a.sourceLine:empty
+  { position: absolute; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Predgovor</a></li>
+<li class="chapter" data-level="1" data-path="analiza-glavnih-komponenti-pca.html"><a href="analiza-glavnih-komponenti-pca.html"><i class="fa fa-check"></i><b>1</b> Analiza glavnih komponenti (PCA)</a><ul>
+<li class="chapter" data-level="1.1" data-path="analiza-glavnih-komponenti-pca.html"><a href="analiza-glavnih-komponenti-pca.html#ideja-i-postupak"><i class="fa fa-check"></i><b>1.1</b> Ideja i postupak</a></li>
+<li class="chapter" data-level="1.2" data-path="analiza-glavnih-komponenti-pca.html"><a href="analiza-glavnih-komponenti-pca.html#smanjivanje-dimenzije"><i class="fa fa-check"></i><b>1.2</b> Smanjivanje dimenzije</a></li>
+<li class="chapter" data-level="" data-path="analiza-glavnih-komponenti-pca.html"><a href="analiza-glavnih-komponenti-pca.html#neke-napomene"><i class="fa fa-check"></i>Neke napomene</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="logisticka-regresija.html"><a href="logisticka-regresija.html"><i class="fa fa-check"></i><b>2</b> Logistička regresija</a><ul>
+<li class="chapter" data-level="2.1" data-path="logisticka-regresija.html"><a href="logisticka-regresija.html#uvod"><i class="fa fa-check"></i><b>2.1</b> Uvod</a></li>
+<li class="chapter" data-level="2.2" data-path="logisticka-regresija.html"><a href="logisticka-regresija.html#kvote"><i class="fa fa-check"></i><b>2.2</b> Kvote</a></li>
+<li class="chapter" data-level="2.3" data-path="logisticka-regresija.html"><a href="logisticka-regresija.html#ocene-parametara-beta"><i class="fa fa-check"></i><b>2.3</b> Ocene parametara <span class="math inline">\(\beta\)</span></a></li>
+<li class="chapter" data-level="2.4" data-path="logisticka-regresija.html"><a href="logisticka-regresija.html#interpretacija-parametara-beta"><i class="fa fa-check"></i><b>2.4</b> Interpretacija parametara <span class="math inline">\(\beta\)</span></a></li>
+<li class="chapter" data-level="2.5" data-path="logisticka-regresija.html"><a href="logisticka-regresija.html#testiranje-znacajnosti-koeficijenata"><i class="fa fa-check"></i><b>2.5</b> Testiranje značajnosti koeficijenata</a><ul>
+<li class="chapter" data-level="2.5.1" data-path="logisticka-regresija.html"><a href="logisticka-regresija.html#valdov-test"><i class="fa fa-check"></i><b>2.5.1</b> Valdov test</a></li>
+</ul></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Teorijski priručnik za LSM</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="logisticka-regresija" class="section level1">
+<h1><span class="header-section-number">2</span> Logistička regresija</h1>
+
+<div id="uvod" class="section level2">
+<h2><span class="header-section-number">2.1</span> Uvod</h2>
+<p>Pretpostavimo da je zavisna promenljiva <span class="math inline">\(Y\)</span> indikator nekog dogadjaja, tj. da ima Bernulijevu raspodelu, čiji parametar zavisi od vrednosti prediktora <span class="math inline">\(X\)</span>:
+<span class="math display">\[Y:\begin{pmatrix}0 &amp; 1 \\1-\pi(X) &amp; \pi(X)\end{pmatrix}.\]</span> Kako <span class="math inline">\(Y\)</span> uzima samo dve vrednosti, nema smisla koristiti linearan model <span class="math inline">\(Y = \beta_0 + \beta_1X\)</span>. Smislenije je modelovati verovatnoću <span class="math inline">\(P\{Y=1\mid X\} = \pi(X)\in[0,1]\)</span>, ali, zbog ograničenosti verovatnoće, model <span class="math inline">\(\pi(X)=\beta_0 + \beta_1X\)</span> takodje nije adekvatan.</p>
+<p>Zato je potrebno modelovati ovu verovatnoću kao <span class="math inline">\(\pi(X) = g(\beta_0 + \beta_1X)\)</span>, gde je <span class="math inline">\(g\)</span> funkcija koja uzima vrednosti iz <span class="math inline">\([0,1]\)</span>. Postoje razni izbori ove funkcije <span class="math inline">\(g\)</span>, od kojih su najčešći funkcije raspodela odredjenih raspodela verovatnoća (npr. probit regresija koristi standardnu normalnu raspodelu <span class="math inline">\(g(x)=\Phi(x)\)</span>).</p>
+<p>U kontekstu logističke regresije, model koji koristimo je
+<span class="math display">\[\pi(X) = \frac{e^{\beta_0 + \beta_1X}}{1+e^{\beta_0 + \beta_1X}}.\]</span>
+U ovom slučaju uzeli smo <span class="math inline">\(g(x) = \frac{e^x}{1+e^x}\)</span>, što je funkcija raspodele logističke raspodele. Ova funkcija se takodje zove i logistička funkcija, a i specijalan slučaj je tzv. sigmoidnih funkcija.</p>
+</div>
+<div id="kvote" class="section level2">
+<h2><span class="header-section-number">2.2</span> Kvote</h2>
+<p>Ako je <span class="math inline">\(\pi(X) = \frac{e^{\beta_0 + \beta_1X}}{1+e^{\beta_0 + \beta_1X}}\)</span>, onda će biti <span class="math display">\[\log\frac{\pi(X)}{1-\pi(X)} = \beta_0 + \beta_1X.\]</span> Veličina <span class="math inline">\(\frac{\pi(X)}{1-\pi(X)}\in(0, +\infty)\)</span> se naziva kvotom i mi u logističkoj regresiji u suštini modelujemo logaritam kvote linearnim modelom.</p>
+<p>Kvota <span class="math inline">\(q(X) = \frac{\pi(X)}{1-\pi(X)}=\frac{P\{Y=1\mid X\}}{P\{Y=0\mid X\}}\)</span> predstavlja odnos verovatnoća da zavisna promenljiva uzme vrednost 1 odnosno 0, za odredjenu vrednost prediktora. Ukoliko su ove dve verovatnoće jednake, kvota će biti 1.
+Ako je <span class="math inline">\(q(X)&gt;1\)</span>, to znači da je verovatnoća da <span class="math inline">\(Y\)</span> uzme vrednost 1 <span class="math inline">\(q(X)\)</span> puta veča nego da uzme vrednost 0. Obrat važi u slučaju da je <span class="math inline">\(q(X)&lt;1\)</span>.</p>
+<p>Na primer, ako je <span class="math inline">\(q(X)=4=4:1\)</span>, to znači da je 4 puta verovatnije da je <span class="math inline">\(Y=1\)</span> nego <span class="math inline">\(Y=0\)</span>. S druge strane, ako je <span class="math inline">\(q(X)=0.125=1:8\)</span>, to znači da je 8 puta verovatnije da je <span class="math inline">\(Y=0\)</span> nego <span class="math inline">\(Y=1\)</span>.</p>
+</div>
+<div id="ocene-parametara-beta" class="section level2">
+<h2><span class="header-section-number">2.3</span> Ocene parametara <span class="math inline">\(\beta\)</span></h2>
+<p>Parametri modela logističke regresije se ocenjuju metodom maksimalne verodostojnosti, odnosno rešavanjem minimizacionog problema (zbog lakšeg računa se gleda logaritam funkcije verodostojnosti):
+<span class="math display">\[\hat\beta = \underset{\beta}{argmin}\ \log\left( \prod_{i=1}^n\left(1-\pi(x_i)\right)^{1-y_i}\pi(x_i)^{y_i}\right).\]</span> Detalji izračunavanja se nalaze u skripti za predavanja.</p>
+</div>
+<div id="interpretacija-parametara-beta" class="section level2">
+<h2><span class="header-section-number">2.4</span> Interpretacija parametara <span class="math inline">\(\beta\)</span></h2>
+<p>Kod (proste) linearne regresije, parametar <span class="math inline">\(b_1\)</span> se interpretira kao “za koliko se promeni <span class="math inline">\(Y\)</span> ako se <span class="math inline">\(X\)</span> promeni za 1 jedinicu mere”. Kod logističke regresije je situacija nešto kompleksnija, jer imamo logističku transformaciju.</p>
+<p>Pogledajmo šta se dešava ako <span class="math inline">\(X\)</span> povećamo za 1 jedinicu mere.
+Kako je <span class="math inline">\(\log(q(X)) = \beta_0 + \beta_1X\)</span>, biće <span class="math inline">\(\log(q(X+1)) - \log(q(X)) = \beta_1\)</span>, tj. <span class="math inline">\(\beta_1\)</span> predstavlja promenu logaritma kvote. Odavde imamo <span class="math inline">\(\log\frac{q(X+1)}{q(X)}= \beta_1\)</span>, pa stoga <span class="math display">\[\frac{q(X+1)}{q(X)} = e^\beta_1.\]</span> Dakle, prilikom povećanja vrednosti <span class="math inline">\(X\)</span> za 1 jedinicu mere, kvota se menja <span class="math inline">\(e^\beta_1\)</span> puta.</p>
+<p>Ako je <span class="math inline">\(\beta_1=0\)</span>, to znači da nema promene u kvoti, a samim tim ni u verovatnoći <span class="math inline">\(\pi(X)\)</span>. Ovo je u saglasnosti sa slučajem linearne regresije kada smo testirali da li je koeficijent nula, čime smo odredjivali da li je značajan ili ne.
+Ako je <span class="math inline">\(\beta_1&lt;0\)</span>, kvota se smanjuje, dok ako je <span class="math inline">\(\beta_1&gt;0\)</span> kvota se povećava.</p>
+<p>Kako se povećanjem (smanjenjem) kvote povećava (smanjuje) i verovatnoća <span class="math inline">\(\pi(X)\)</span>, zaključujemo da znak koeficijenta <span class="math inline">\(\beta_!\)</span> odredjuje pozitivan ili negativan uticaj prediktora <span class="math inline">\(X\)</span> na verovatnoću <span class="math inline">\(P\{Y=1\mid X\}\)</span>.
+Konkretna vrednost <span class="math inline">\(e^\beta_1\)</span> odredjuje koliko puta se menja kvota jediničnom promenom u prediktoru <span class="math inline">\(X\)</span>.</p>
+<p>Ova priča je bila samo u slučaju 1 prediktora <span class="math inline">\(X\)</span>, ali se jednostavno uopštava na više prediktora. Naime, koeficijent uz <span class="math inline">\(X_1\)</span> će uticati na promenu u kvoti za jedinično povečanje vrednosti <span class="math inline">\(X_1\)</span>, pri uslovu da su vredosti svih drugih prediktora fiksirane.</p>
+</div>
+<div id="testiranje-znacajnosti-koeficijenata" class="section level2">
+<h2><span class="header-section-number">2.5</span> Testiranje značajnosti koeficijenata</h2>
+<div id="valdov-test" class="section level3">
+<h3><span class="header-section-number">2.5.1</span> Valdov test</h3>
+<p>Kao što smo rekli, smatramo da postoji uticaj prediktora <span class="math inline">\(X\)</span> na verovatnoću <span class="math inline">\(\pi(X)\)</span> i kažemo da je statistički značajan, ako je <span class="math inline">\(\beta_1\neq 0\)</span>. Dakle, prilikom testiranja značajnosti nekog koeficijenta <span class="math inline">\(\beta_i\)</span> testiraćemo hipotezu <span class="math display">\[H_0 : \beta_i=0\quad \text{protiv} \quad H_1:\beta_i\neq0.\]</span></p>
+<p>U ovu svrhu možemo koristiti test statistiku:
+<span class="math display">\[\frac{\hat{\beta_i} - \beta_i}{s.e.(\hat\beta_i)} \sim \mathcal{N}(0,1),\]</span>
+što znači da pod nultom hipotezom <span class="math inline">\(H_0 : \beta_i=0\)</span> važi
+<span class="math display">\[\frac{\hat{\beta_i}}{s.e.(\hat\beta_i)} \sim \mathcal{N}(0,1).\]</span>
+Ovaj test je korišćen u R-u za testiranje značajnosti pojedinačnih koeficijenata (zvezdice).</p>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="analiza-glavnih-komponenti-pca.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

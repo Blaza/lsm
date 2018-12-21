@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>1 Analiza glavnih komponenti (PCA) | Teorijski priručnik za LSM</title>
+  <meta name="description" content="1 Analiza glavnih komponenti (PCA) | Teorijski priručnik za LSM">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+
+  <meta property="og:title" content="1 Analiza glavnih komponenti (PCA) | Teorijski priručnik za LSM" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="1 Analiza glavnih komponenti (PCA) | Teorijski priručnik za LSM" />
+  
+  
+  
+
+<meta name="author" content="Blagoje Ivanović">
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="index.html">
+<link rel="next" href="logisticka-regresija.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; position: absolute; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; }
+pre.numberSource a.sourceLine:empty
+  { position: absolute; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Predgovor</a></li>
+<li class="chapter" data-level="1" data-path="analiza-glavnih-komponenti-pca.html"><a href="analiza-glavnih-komponenti-pca.html"><i class="fa fa-check"></i><b>1</b> Analiza glavnih komponenti (PCA)</a><ul>
+<li class="chapter" data-level="1.1" data-path="analiza-glavnih-komponenti-pca.html"><a href="analiza-glavnih-komponenti-pca.html#ideja-i-postupak"><i class="fa fa-check"></i><b>1.1</b> Ideja i postupak</a></li>
+<li class="chapter" data-level="1.2" data-path="analiza-glavnih-komponenti-pca.html"><a href="analiza-glavnih-komponenti-pca.html#smanjivanje-dimenzije"><i class="fa fa-check"></i><b>1.2</b> Smanjivanje dimenzije</a></li>
+<li class="chapter" data-level="" data-path="analiza-glavnih-komponenti-pca.html"><a href="analiza-glavnih-komponenti-pca.html#neke-napomene"><i class="fa fa-check"></i>Neke napomene</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="logisticka-regresija.html"><a href="logisticka-regresija.html"><i class="fa fa-check"></i><b>2</b> Logistička regresija</a><ul>
+<li class="chapter" data-level="2.1" data-path="logisticka-regresija.html"><a href="logisticka-regresija.html#uvod"><i class="fa fa-check"></i><b>2.1</b> Uvod</a></li>
+<li class="chapter" data-level="2.2" data-path="logisticka-regresija.html"><a href="logisticka-regresija.html#kvote"><i class="fa fa-check"></i><b>2.2</b> Kvote</a></li>
+<li class="chapter" data-level="2.3" data-path="logisticka-regresija.html"><a href="logisticka-regresija.html#ocene-parametara-beta"><i class="fa fa-check"></i><b>2.3</b> Ocene parametara <span class="math inline">\(\beta\)</span></a></li>
+<li class="chapter" data-level="2.4" data-path="logisticka-regresija.html"><a href="logisticka-regresija.html#interpretacija-parametara-beta"><i class="fa fa-check"></i><b>2.4</b> Interpretacija parametara <span class="math inline">\(\beta\)</span></a></li>
+<li class="chapter" data-level="2.5" data-path="logisticka-regresija.html"><a href="logisticka-regresija.html#testiranje-znacajnosti-koeficijenata"><i class="fa fa-check"></i><b>2.5</b> Testiranje značajnosti koeficijenata</a><ul>
+<li class="chapter" data-level="2.5.1" data-path="logisticka-regresija.html"><a href="logisticka-regresija.html#valdov-test"><i class="fa fa-check"></i><b>2.5.1</b> Valdov test</a></li>
+</ul></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Teorijski priručnik za LSM</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="analiza-glavnih-komponenti-pca" class="section level1">
+<h1><span class="header-section-number">1</span> Analiza glavnih komponenti (PCA)</h1>
+<p>Kod višestruke regresije u opštem slučaju prediktori su korelisani. Analiza
+glavnih komponenti (Principal Component Analysis) koristi se kao alat u
+ispitivanju podataka i pri pravljenju modela; u pretprocesiranju, ispitivanju
+skupa opservacija i skupa prediktora. Ovom statističkom procedurom se,
+korišćenjem linearnih transformacija, početni skup prediktora transformiše u
+novi skup nekorelisanih prediktora. Pritom se identifikuju oni prediktori koji
+su najbitniji za podatke, koji opisuju najviše varijabilnosti, i oni koji nisu
+toliko bitni. Te nebitne prediktore onda možemo izbaciti i sprovesti linearnu
+regresiju sa transformisanim prediktorima i sa manje njih. Na taj način se PCA
+koristi za smanjivanje dimenzionalnosti i povećanje interpretabilnosti.</p>
+<p><em>(Uvod kopiran sa odlične prezentacije Anice Kostić (<a href="http://www.matf.bg.ac.rs/p/files/1529938920-69-pca.html">link</a>), koju valja pogledati za detaljniji pregled PCA)</em></p>
+<div id="ideja-i-postupak" class="section level2">
+<h2><span class="header-section-number">1.1</span> Ideja i postupak</h2>
+<p>Pretpostavimo da imamo sledeći skup podataka (samo prediktori).</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Generisemo neke podatke</span>
+<span class="kw">set.seed</span>(<span class="dv">216</span>)
+x1 &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">100</span>)
+x2 &lt;-<span class="st"> </span>x1 <span class="op">+</span><span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">100</span>, <span class="dt">sd =</span> <span class="fl">0.5</span>)
+
+<span class="co"># Vidimo da je najveca varijabilnost podataka duz prave y = x</span>
+<span class="kw">par</span>(<span class="dt">pty=</span><span class="st">&quot;s&quot;</span>) <span class="co"># hocemo kvadratni grafik</span>
+<span class="kw">plot</span>(x1, x2, <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>), <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>))
+
+<span class="kw">arrows</span>(<span class="kw">c</span>(<span class="kw">mean</span>(x1) <span class="op">-</span><span class="st"> </span><span class="dv">1</span>, <span class="kw">mean</span>(x1) <span class="op">+</span><span class="st"> </span><span class="dv">1</span>), <span class="kw">c</span>(<span class="kw">mean</span>(x2) <span class="op">-</span><span class="st"> </span><span class="dv">1</span>, <span class="kw">mean</span>(x2) <span class="op">-</span><span class="st"> </span><span class="dv">1</span>),
+       <span class="kw">c</span>(<span class="kw">mean</span>(x1) <span class="op">+</span><span class="st"> </span><span class="dv">1</span>, <span class="kw">mean</span>(x1) <span class="op">-</span><span class="st"> </span><span class="dv">1</span>), <span class="kw">c</span>(<span class="kw">mean</span>(x2) <span class="op">+</span><span class="st"> </span><span class="dv">1</span>, <span class="kw">mean</span>(x2) <span class="op">+</span><span class="st"> </span><span class="dv">1</span>),
+       <span class="dt">col=</span><span class="st">&quot;blue&quot;</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)</code></pre>
+<p><img src="_main_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
+<p>Strelicama su označeni pravci najveće varijabilnosti u podacima.</p>
+<p>Analiza glavnih komponenti se vrši nad standardizovanim podacima, pa pretpostavljamo da je <span class="math inline">\(X\)</span> ovde matrica standardizovanih prediktora.</p>
+<p>Osnovna ideja je da se rotira ovaj skup prediktora tako da se pravci najvece
+varijabilnosti nalaze na osama i da prediktori postanu ortogonalni.
+Rotacija se dobija množenjem matricom, pa uzimamo nov skup prediktora <span class="math inline">\(Z = XU\)</span>, gde treba odrediti <span class="math inline">\(U\)</span> tako da prediktori <span class="math inline">\(Z\)</span> budu ortogonalni, tj. da je <span class="math inline">\(Z^\top Z\)</span> dijagonalna.</p>
+<p>Matrica <span class="math inline">\(X\top X\)</span> je simetrična, pa se može dijagonalizovati, odnosno postoji ortogonalna matrica <span class="math inline">\(M\)</span> (sačinjena od sopstvenih vektora matrice <span class="math inline">\(X\top X\)</span>), takva da je <span class="math inline">\(X\top X = MDM^\top\)</span>, gde je <span class="math inline">\(D=diag\{\lambda_1, \dots, \lambda_p\}\)</span> dijagonalna matrica sa sopstvenim vrednostima matrice <span class="math inline">\(X\top X\)</span> na dijagonali.</p>
+<p>Odatle, ako uzmemo da je <span class="math inline">\(U=M\)</span>, tj. <span class="math inline">\(Z = XM\)</span>, imamo <span class="math display">\[Z\top Z = M\top X\top XM=M\top MDM^\top M = D,\]</span> jer je <span class="math inline">\(M\)</span> ortogonalna. Dakle, ako je <span class="math inline">\(U\)</span> matrica čije su kolone sopstveni vektori matrice <span class="math inline">\(X\top X\)</span>, transformisani prediktori <span class="math inline">\(Z=XU\)</span> će biti ortogonalni.</p>
+<p>Time dobijamo postupak analize glavnih komponenti:</p>
+<ol style="list-style-type: decimal">
+<li>Standardizujemo prediktore i uzmemo matricu standardizovanih prediktora <span class="math inline">\(X\)</span></li>
+<li>Odredimo sopstvene vektore matrice <span class="math inline">\(X\top X\)</span></li>
+<li>Napravimo matricu <span class="math inline">\(U\)</span> čije su kolone sopstveni vektori matrice <span class="math inline">\(X\top X\)</span></li>
+<li>Uzmemo nov sistem prediktora <span class="math inline">\(Z=XU\)</span></li>
+<li>Glavne komponente su kolone matrice <span class="math inline">\(Z\)</span></li>
+</ol>
+</div>
+<div id="smanjivanje-dimenzije" class="section level2">
+<h2><span class="header-section-number">1.2</span> Smanjivanje dimenzije</h2>
+<p>Jedna od najbitnijih upotreba za PCA je smanjivanje dimenzije. Naime, ako
+imamo mnogo prediktora, korisno je smanjiti broj prediktora sa kojima se radi
+analiza, radi interpretabilnosti. Medjutim, nekad se ne mogu prosto izbaciti
+prediktori iz modela, već neke linearne kombinacije istih utiču na model.
+Analiza glavnih komponenti teži da nadje ove linearne kombinacije prediktora
+iz <span class="math inline">\(X\)</span> koje najviše doprinose varijabilnosti podataka.</p>
+<p>Često se nakon analize glavnih komponenti koristi prvih nekoliko glavnih
+komponenti, čime se smanjuje broj korišćenih prediktora za modelovanje. Neko
+okvirno pravilo je da se uzme onoliko komponenti koje objašnjavaju više od 80%
+varijabilnosti u podacima, što se meri veličinom sopstvenih vrednosti (prve
+glavne komponente odgovaraju najvećim sopstvenim vrednostima).</p>
+<p>Takodje, nekad je moguće na osnovu razmatranja matrice rotacije <span class="math inline">\(U\)</span> odrediti
+tačno koje linearne kombinacije prediktora su bitne. Na primer, ako je matrica
+rotacije približno <span class="math inline">\(U=\begin{pmatrix}1 &amp; 0 \\ -1 &amp; 0\end{pmatrix}\)</span>, to znači da
+je prva glavna komponenta <span class="math inline">\(X_1 - X_2\)</span>, pa ako je udeo varijabilnosti objašnjen
+prvom glavnom komponentom veoma veliki, dobar model bi mogao da koristi samo
+jedan prediktor, i to <span class="math inline">\(X_1 - X_2\)</span>, čime smo modelovanje sveli na prostu
+regresiju.</p>
+</div>
+<div id="neke-napomene" class="section level2 unnumbered">
+<h2>Neke napomene</h2>
+<ul>
+<li><p>Analiza glavnih komponenti ne uzima u obzir zavisnu promenljivu, već se bavim
+samo transformacijama prostora prediktora.</p></li>
+<li><p>Izuzetno je bitno standardizovati podatke pre analize glavnih komponenti. Ako se
+podaci ne standardizuju, problem koji se može javiti je da prediktor koji uzima
+vrednosti u intervalu [-100, 100] izgleda da doprinosi varijabilnosti mnogo više
+nego neki koji je na [-0.1, 0.1], iako su ravnopravni kad se skaliraju.</p></li>
+<li><p>Vrlo slikovito objašnjenje analize glavnih komponenti se može videti na sajtu <a href="https://stats.stackexchange.com/questions/2691/making-sense-of-principal-component-analysis-eigenvectors-eigenvalues">Cross Validated</a></p></li>
+</ul>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="logisticka-regresija.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
