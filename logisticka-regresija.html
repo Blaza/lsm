@@ -141,6 +141,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.5" data-path="logisticka-regresija.html"><a href="logisticka-regresija.html#testiranje-znacajnosti-koeficijenata"><i class="fa fa-check"></i><b>2.5</b> Testiranje značajnosti koeficijenata</a><ul>
 <li class="chapter" data-level="2.5.1" data-path="logisticka-regresija.html"><a href="logisticka-regresija.html#valdov-test"><i class="fa fa-check"></i><b>2.5.1</b> Valdov test</a></li>
 </ul></li>
+<li class="chapter" data-level="2.6" data-path="logisticka-regresija.html"><a href="logisticka-regresija.html#test-kolicnika-verodostojnosti"><i class="fa fa-check"></i><b>2.6</b> Test količnika verodostojnosti</a></li>
 </ul></li>
 </ul>
 
@@ -170,6 +171,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>U kontekstu logističke regresije, model koji koristimo je
 <span class="math display">\[\pi(X) = \frac{e^{\beta_0 + \beta_1X}}{1+e^{\beta_0 + \beta_1X}}.\]</span>
 U ovom slučaju uzeli smo <span class="math inline">\(g(x) = \frac{e^x}{1+e^x}\)</span>, što je funkcija raspodele logističke raspodele. Ova funkcija se takodje zove i logistička funkcija, a i specijalan slučaj je tzv. sigmoidnih funkcija.</p>
+<p>U slučaju da imamo više prediktora, model se jednostavno proširuje na
+<span class="math display">\[\pi(X) = \frac{e^{X\beta}}{1+e^{X\beta}},\]</span> gde je <span class="math inline">\(\beta\)</span> vektor parametara a <span class="math inline">\(X\)</span> model matrica.</p>
 </div>
 <div id="kvote" class="section level2">
 <h2><span class="header-section-number">2.2</span> Kvote</h2>
@@ -185,7 +188,7 @@ Ako je <span class="math inline">\(q(X)&gt;1\)</span>, to znači da je verovatno
 </div>
 <div id="interpretacija-parametara-beta" class="section level2">
 <h2><span class="header-section-number">2.4</span> Interpretacija parametara <span class="math inline">\(\beta\)</span></h2>
-<p>Kod (proste) linearne regresije, parametar <span class="math inline">\(b_1\)</span> se interpretira kao “za koliko se promeni <span class="math inline">\(Y\)</span> ako se <span class="math inline">\(X\)</span> promeni za 1 jedinicu mere”. Kod logističke regresije je situacija nešto kompleksnija, jer imamo logističku transformaciju.</p>
+<p>Kod (proste) linearne regresije, parametar <span class="math inline">\(\beta_1\)</span> se interpretira kao “za koliko se promeni <span class="math inline">\(Y\)</span> ako se <span class="math inline">\(X\)</span> promeni za 1 jedinicu mere”. Kod logističke regresije je situacija nešto kompleksnija, jer imamo logističku transformaciju.</p>
 <p>Pogledajmo šta se dešava ako <span class="math inline">\(X\)</span> povećamo za 1 jedinicu mere.
 Kako je <span class="math inline">\(\log(q(X)) = \beta_0 + \beta_1X\)</span>, biće <span class="math inline">\(\log(q(X+1)) - \log(q(X)) = \beta_1\)</span>, tj. <span class="math inline">\(\beta_1\)</span> predstavlja promenu logaritma kvote. Odavde imamo <span class="math inline">\(\log\frac{q(X+1)}{q(X)}= \beta_1\)</span>, pa stoga <span class="math display">\[\frac{q(X+1)}{q(X)} = e^\beta_1.\]</span> Dakle, prilikom povećanja vrednosti <span class="math inline">\(X\)</span> za 1 jedinicu mere, kvota se menja <span class="math inline">\(e^\beta_1\)</span> puta.</p>
 <p>Ako je <span class="math inline">\(\beta_1=0\)</span>, to znači da nema promene u kvoti, a samim tim ni u verovatnoći <span class="math inline">\(\pi(X)\)</span>. Ovo je u saglasnosti sa slučajem linearne regresije kada smo testirali da li je koeficijent nula, čime smo odredjivali da li je značajan ili ne.
@@ -204,8 +207,16 @@ Konkretna vrednost <span class="math inline">\(e^\beta_1\)</span> odredjuje koli
 što znači da pod nultom hipotezom <span class="math inline">\(H_0 : \beta_i=0\)</span> važi
 <span class="math display">\[\frac{\hat{\beta_i}}{s.e.(\hat\beta_i)} \sim \mathcal{N}(0,1).\]</span>
 Ovaj test je korišćen u R-u za testiranje značajnosti pojedinačnih koeficijenata (zvezdice).</p>
-
 </div>
+</div>
+<div id="test-kolicnika-verodostojnosti" class="section level2">
+<h2><span class="header-section-number">2.6</span> Test količnika verodostojnosti</h2>
+<p>Ukoliko imamo dva ugnježdjena modela <span class="math inline">\(M_A\)</span> i <span class="math inline">\(M_B\)</span>, gde je <span class="math inline">\(M_A\)</span> “manji”, tj. <span class="math inline">\(M_A\)</span> se dobija postavljanjem nekih koeficijenata <span class="math inline">\(M_B\)</span> na nulu, možemo proveriti da li postoji statistički značajna razlika izmedju njih koristeći test količnika verodostojnosti. Ako pretpostavimo da model <span class="math inline">\(M_A\)</span> ima <span class="math inline">\(p_A\)</span> koeficijenata, a <span class="math inline">\(M_B\)</span> <span class="math inline">\(p_B\)</span> koeficijenata, koristimo test statistiku
+<span class="math display">\[2(\log L(\hat\beta_{B})-\log L(\hat\beta_{A})) = 2\log\left(\frac{L(\hat\beta_{B})}{L(\hat\beta_{A})}\right)\sim \chi_{p_B-p_A}^2,\]</span> gde je <span class="math inline">\(L(\beta)\)</span> funkcija verodostojnosti. Velike vrednosti ove statistike ukazuju na postojanje značajne razlike medju modelima.</p>
+<p>U R-u je ovaj test implementiran u funkciji <code>anova</code> kada joj se da argument <code>test = &quot;Chisq&quot;</code>.</p>
+<p>Vidimo da ovim testom možemo da napravimo analogon <span class="math inline">\(F\)</span> testu za linearni model, poredeći odnos verodostojnosti modela koji koristimo i modela koji ujljučuje samo slobodan član.</p>
+<p>Treba imati u vidu da će p-vrednosti testiranja značajnosti pojedinačnih koeficijenata Valdovim testom i testom količnika verodostojnosti u opštem slučaju biti različite (za razliku od <span class="math inline">\(t\)</span> i <span class="math inline">\(F\)</span> testa u slučaju linearnih modela).</p>
+
 </div>
 </div>
             </section>
