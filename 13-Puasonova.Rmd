@@ -1,0 +1,17 @@
+# Puasonova regresija
+
+\require{\amsmath}
+
+Kod Puasonove regresije pretpostavljamo da zavisna promenljiva ima Puasonovu raspodelu
+$$Y \sim \mathcal{P}(\lambda(X)),$$ gde parametar raspodele $\lambda$ zavisi od prediktora $X$.
+
+Kako zbog prirode zavisne promenljive, koja uzima celobrojne vrednosti, nije pogodno modelovati $Y$ linearnim modelom, mi ćemo modelovati očekivanje $E(Y|X) = \lambda(X)$, koje uzima realne vrednosti. Kako je parametar $\lambda$ pozitivan, modelovaćemo njegov logaritam linearnim modelom, čime dobijamo model Puasonove regresije
+$$\log(\lambda(X)) = \beta_0 + \beta_1X_1+\dots+\beta_pX_p=X\beta,$$ gde je $\beta$ vektor koeficijenata modela.
+
+Ocene koeficijenata $\beta$ se računaju metodom maksimalne verodostojnosti. naime
+$$\hat\beta = \underset{\beta}{argmin}\ \log\left( \prod_{i=1}^n \frac{\lambda(x_i)^{y_i}}{y_i!}e^{-\lambda(x_i)}\right).$$
+
+Testiranje značajnosti koeficijenata se radi na isti način kao u logističkoj regresiji, pa nećemo ulaziti u detalje ovde.
+
+
+
