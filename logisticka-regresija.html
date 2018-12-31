@@ -140,8 +140,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.4" data-path="logisticka-regresija.html"><a href="logisticka-regresija.html#interpretacija-parametara-beta"><i class="fa fa-check"></i><b>2.4</b> Interpretacija parametara <span class="math inline">\(\beta\)</span></a></li>
 <li class="chapter" data-level="2.5" data-path="logisticka-regresija.html"><a href="logisticka-regresija.html#testiranje-znacajnosti-koeficijenata"><i class="fa fa-check"></i><b>2.5</b> Testiranje značajnosti koeficijenata</a><ul>
 <li class="chapter" data-level="2.5.1" data-path="logisticka-regresija.html"><a href="logisticka-regresija.html#valdov-test"><i class="fa fa-check"></i><b>2.5.1</b> Valdov test</a></li>
+<li class="chapter" data-level="2.5.2" data-path="logisticka-regresija.html"><a href="logisticka-regresija.html#test-kolicnika-verodostojnosti"><i class="fa fa-check"></i><b>2.5.2</b> Test količnika verodostojnosti</a></li>
 </ul></li>
-<li class="chapter" data-level="2.6" data-path="logisticka-regresija.html"><a href="logisticka-regresija.html#test-kolicnika-verodostojnosti"><i class="fa fa-check"></i><b>2.6</b> Test količnika verodostojnosti</a></li>
 </ul></li>
 </ul>
 
@@ -208,15 +208,15 @@ Konkretna vrednost <span class="math inline">\(e^\beta_1\)</span> odredjuje koli
 <span class="math display">\[\frac{\hat{\beta_i}}{s.e.(\hat\beta_i)} \sim \mathcal{N}(0,1).\]</span>
 Ovaj test je korišćen u R-u za testiranje značajnosti pojedinačnih koeficijenata (zvezdice).</p>
 </div>
-</div>
-<div id="test-kolicnika-verodostojnosti" class="section level2">
-<h2><span class="header-section-number">2.6</span> Test količnika verodostojnosti</h2>
+<div id="test-kolicnika-verodostojnosti" class="section level3">
+<h3><span class="header-section-number">2.5.2</span> Test količnika verodostojnosti</h3>
 <p>Ukoliko imamo dva ugnježdjena modela <span class="math inline">\(M_A\)</span> i <span class="math inline">\(M_B\)</span>, gde je <span class="math inline">\(M_A\)</span> “manji”, tj. <span class="math inline">\(M_A\)</span> se dobija postavljanjem nekih koeficijenata <span class="math inline">\(M_B\)</span> na nulu, možemo proveriti da li postoji statistički značajna razlika izmedju njih koristeći test količnika verodostojnosti. Ako pretpostavimo da model <span class="math inline">\(M_A\)</span> ima <span class="math inline">\(p_A\)</span> koeficijenata, a <span class="math inline">\(M_B\)</span> <span class="math inline">\(p_B\)</span> koeficijenata, koristimo test statistiku
 <span class="math display">\[2(\log L(\hat\beta_{B})-\log L(\hat\beta_{A})) = 2\log\left(\frac{L(\hat\beta_{B})}{L(\hat\beta_{A})}\right)\sim \chi_{p_B-p_A}^2,\]</span> gde je <span class="math inline">\(L(\beta)\)</span> funkcija verodostojnosti. Velike vrednosti ove statistike ukazuju na postojanje značajne razlike medju modelima.</p>
 <p>U R-u je ovaj test implementiran u funkciji <code>anova</code> kada joj se da argument <code>test = &quot;Chisq&quot;</code>.</p>
 <p>Vidimo da ovim testom možemo da napravimo analogon <span class="math inline">\(F\)</span> testu za linearni model, poredeći odnos verodostojnosti modela koji koristimo i modela koji ujljučuje samo slobodan član.</p>
 <p>Treba imati u vidu da će p-vrednosti testiranja značajnosti pojedinačnih koeficijenata Valdovim testom i testom količnika verodostojnosti u opštem slučaju biti različite (za razliku od <span class="math inline">\(t\)</span> i <span class="math inline">\(F\)</span> testa u slučaju linearnih modela).</p>
 
+</div>
 </div>
 </div>
             </section>
