@@ -13,6 +13,9 @@ U kontekstu logističke regresije, model koji koristimo je
 $$\pi(X) = \frac{e^{\beta_0 + \beta_1X}}{1+e^{\beta_0 + \beta_1X}}.$$
 U ovom slučaju uzeli smo $g(x) = \frac{e^x}{1+e^x}$, što je funkcija raspodele logističke raspodele. Ova funkcija se takodje zove i logistička funkcija, a i specijalan slučaj je tzv. sigmoidnih funkcija.
 
+U slučaju da imamo više prediktora, model se jednostavno proširuje na
+$$\pi(X) = \frac{e^{X\beta}}{1+e^{X\beta}},$$ gde je $\beta$ vektor parametara a $X$ model matrica.
+
 ## Kvote
 
 Ako je $\pi(X) = \frac{e^{\beta_0 + \beta_1X}}{1+e^{\beta_0 + \beta_1X}}$, onda će biti $$\log\frac{\pi(X)}{1-\pi(X)} = \beta_0 + \beta_1X.$$ Veličina $\frac{\pi(X)}{1-\pi(X)}\in(0, +\infty)$ se naziva kvotom i mi u logističkoj regresiji u suštini modelujemo logaritam kvote linearnim modelom.
@@ -29,7 +32,7 @@ $$\hat\beta = \underset{\beta}{argmin}\ \log\left( \prod_{i=1}^n\left(1-\pi(x_i)
 
 ## Interpretacija parametara $\beta$
 
-Kod (proste) linearne regresije, parametar $b_1$ se interpretira kao "za koliko se promeni $Y$ ako se $X$ promeni za 1 jedinicu mere". Kod logističke regresije je situacija nešto kompleksnija, jer imamo logističku transformaciju.
+Kod (proste) linearne regresije, parametar $\beta_1$ se interpretira kao "za koliko se promeni $Y$ ako se $X$ promeni za 1 jedinicu mere". Kod logističke regresije je situacija nešto kompleksnija, jer imamo logističku transformaciju.
 
 Pogledajmo šta se dešava ako $X$ povećamo za 1 jedinicu mere.
 Kako je $\log(q(X)) = \beta_0 + \beta_1X$, biće $\log(q(X+1)) - \log(q(X)) = \beta_1$, tj. $\beta_1$ predstavlja promenu logaritma kvote. Odavde imamo $\log\frac{q(X+1)}{q(X)}= \beta_1$, pa stoga  $$\frac{q(X+1)}{q(X)} = e^\beta_1.$$ Dakle, prilikom povećanja vrednosti $X$ za 1 jedinicu mere, kvota se menja $e^\beta_1$ puta.
@@ -53,3 +56,18 @@ $$\frac{\hat{\beta_i} - \beta_i}{s.e.(\hat\beta_i)} \sim \mathcal{N}(0,1),$$
 što znači da pod nultom hipotezom $H_0 : \beta_i=0$ važi 
 $$\frac{\hat{\beta_i}}{s.e.(\hat\beta_i)} \sim \mathcal{N}(0,1).$$
 Ovaj test je korišćen u R-u za testiranje značajnosti pojedinačnih koeficijenata (zvezdice).
+
+## Test količnika verodostojnosti
+
+Ukoliko imamo dva ugnježdjena modela $M_A$ i $M_B$, gde je $M_A$ "manji", tj. $M_A$ se dobija postavljanjem nekih koeficijenata $M_B$ na nulu, možemo proveriti da li postoji statistički značajna razlika izmedju njih koristeći test količnika verodostojnosti. Ako pretpostavimo da model $M_A$ ima $p_A$ koeficijenata, a $M_B$ $p_B$ koeficijenata, koristimo test statistiku
+$$2(\log L(\hat\beta_{B})-\log L(\hat\beta_{A})) = 2\log\left(\frac{L(\hat\beta_{B})}{L(\hat\beta_{A})}\right)\sim \chi_{p_B-p_A}^2,$$ gde je $L(\beta)$ funkcija verodostojnosti. Velike vrednosti ove statistike ukazuju na postojanje značajne razlike medju modelima.
+
+U R-u je ovaj test implementiran u funkciji `anova` kada joj se da argument `test = "Chisq"`.
+
+Vidimo da ovim testom možemo da napravimo analogon $F$ testu za linearni model, poredeći odnos verodostojnosti modela koji koristimo i modela koji ujljučuje samo slobodan član.
+
+Treba imati u vidu da će p-vrednosti testiranja značajnosti pojedinačnih koeficijenata Valdovim testom i testom količnika verodostojnosti u opštem slučaju biti različite (za razliku od $t$ i $F$ testa u slučaju linearnih modela).
+
+
+
+
