@@ -5,11 +5,11 @@
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Teorijski priručnik za LSM</title>
-  <meta name="description" content="Teorijski priručnik za LSM">
+  <title>3 Puasonova regresija | Teorijski priručnik za LSM</title>
+  <meta name="description" content="3 Puasonova regresija | Teorijski priručnik za LSM">
   <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
-  <meta property="og:title" content="Teorijski priručnik za LSM" />
+  <meta property="og:title" content="3 Puasonova regresija | Teorijski priručnik za LSM" />
   <meta property="og:type" content="book" />
   
   
@@ -17,7 +17,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Teorijski priručnik za LSM" />
+  <meta name="twitter:title" content="3 Puasonova regresija | Teorijski priručnik za LSM" />
   
   
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
+<link rel="prev" href="logisticka-regresija.html">
 
-<link rel="next" href="analiza-glavnih-komponenti-pca.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -161,16 +161,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Teorijski priručnik za LSM</h1>
-<p class="author"><em>Blagoje Ivanović</em></p>
-<p class="date"><em>Poslednja izmena: 31 December, 2018</em></p>
-</div>
-<div id="predgovor" class="section level1 unnumbered">
-<h1>Predgovor</h1>
-<p>Na ovoj stranici će biti prikazane teorijske osnove potrebne za praćenje vežbi i razumevanje kodova koji se mogu naći na stranici kursa. Može se shvatiti kao beleške sa vežbi. U razvojnoj je fazi i biće dopunjavana relativno često.</p>
-<p>Opširnije teorijsko razmatranje linearnih modela se nalazi u materijalima profesorke Bojane Milošević, na adresi: <a href="http://www.matf.bg.ac.rs/p/bojana-milosevic/kurs/533/linearni-statisticki-modeli/" class="uri">http://www.matf.bg.ac.rs/p/bojana-milosevic/kurs/533/linearni-statisticki-modeli/</a></p>
-<p>Sa leve strane se nalazi sadržaj koji sadrži oblasti koje su predjene na vežbama (za koje je napisan teorijski uvod). Kodovi u R-u koji prate sve oblasti se nalaze na <a href="http://www.matf.bg.ac.rs/p/blagoje-ivanovic/cas/2731/%C4%8Casovi/">http://www.matf.bg.ac.rs/p/blagoje-ivanovic/cas/2731/%C4%8Casovi/</a></p>
+<div id="puasonova-regresija" class="section level1">
+<h1><span class="header-section-number">3</span> Puasonova regresija</h1>
+
+<p>Kod Puasonove regresije pretpostavljamo da zavisna promenljiva ima Puasonovu raspodelu
+<span class="math display">\[Y \sim \mathcal{P}(\lambda(X)),\]</span> gde parametar raspodele <span class="math inline">\(\lambda\)</span> zavisi od prediktora <span class="math inline">\(X\)</span>.</p>
+<p>Kako zbog prirode zavisne promenljive, koja uzima celobrojne vrednosti, nije pogodno modelovati <span class="math inline">\(Y\)</span> linearnim modelom, mi ćemo modelovati očekivanje <span class="math inline">\(E(Y|X) = \lambda(X)\)</span>, koje uzima realne vrednosti. Kako je parametar <span class="math inline">\(\lambda\)</span> pozitivan, modelovaćemo njegov logaritam linearnim modelom, čime dobijamo model Puasonove regresije
+<span class="math display">\[\log(\lambda(X)) = \beta_0 + \beta_1X_1+\dots+\beta_pX_p=X\beta,\]</span> gde je <span class="math inline">\(\beta\)</span> vektor koeficijenata modela.</p>
+<p>Ocene koeficijenata <span class="math inline">\(\beta\)</span> se računaju metodom maksimalne verodostojnosti. naime
+<span class="math display">\[\hat\beta = \underset{\beta}{argmin}\ \log\left( \prod_{i=1}^n \frac{\lambda(x_i)^{y_i}}{y_i!}e^{-\lambda(x_i)}\right).\]</span></p>
+<p>Testiranje značajnosti koeficijenata se radi na isti način kao u logističkoj regresiji, pa nećemo ulaziti u detalje ovde.</p>
 
 </div>
             </section>
@@ -178,8 +178,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
+<a href="logisticka-regresija.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 
-<a href="analiza-glavnih-komponenti-pca.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
