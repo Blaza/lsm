@@ -57,7 +57,7 @@ $$\frac{\hat{\beta_i} - \beta_i}{s.e.(\hat\beta_i)} \sim \mathcal{N}(0,1),$$
 $$\frac{\hat{\beta_i}}{s.e.(\hat\beta_i)} \sim \mathcal{N}(0,1).$$
 Ovaj test je korišćen u R-u za testiranje značajnosti pojedinačnih koeficijenata (zvezdice).
 
-## Test količnika verodostojnosti
+### Test količnika verodostojnosti
 
 Ukoliko imamo dva ugnježdjena modela $M_A$ i $M_B$, gde je $M_A$ "manji", tj. $M_A$ se dobija postavljanjem nekih koeficijenata $M_B$ na nulu, možemo proveriti da li postoji statistički značajna razlika izmedju njih koristeći test količnika verodostojnosti. Ako pretpostavimo da model $M_A$ ima $p_A$ koeficijenata, a $M_B$ $p_B$ koeficijenata, koristimo test statistiku
 $$2(\log L(\hat\beta_{B})-\log L(\hat\beta_{A})) = 2\log\left(\frac{L(\hat\beta_{B})}{L(\hat\beta_{A})}\right)\sim \chi_{p_B-p_A}^2,$$ gde je $L(\beta)$ funkcija verodostojnosti. Velike vrednosti ove statistike ukazuju na postojanje značajne razlike medju modelima.
